@@ -1012,6 +1012,10 @@ class SlidingWindowMLASpec(SlidingWindowSpec):
     alignment: int | None = None  # Default to None for no padding.
     model_version: str | None = None
     bounded_replay: bool = False
+    # Mirrors MLAAttentionSpec: a sliding-window MLA layer can also flatten a
+    # non-causal query block into decode rows (the Mistral Large 4 DSpark draft
+    # is both), and the KV-group merge reads this off every spec.
+    non_causal_multi_token_decode: bool = False
 
     # MLA stores a single latent vector per state; there is no separate V.
     head_size_v: int = 0
